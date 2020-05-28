@@ -1,0 +1,64 @@
+﻿<div ng-if="Settings.CurrentLanguage == null" class="vcell_xs_24" style="overflow-y:auto;">
+	<div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="HelperService.Navigate('App')">
+			<div class="label text_white text_center">Back</div>
+		</div>
+	<div class="vcell_xs_21 padding_10" style="overflow-y: auto;">
+		<div ng-repeat="language in Languages" class="cell_xs_24 cell_sm_12 cell_md_8 padding_10">
+			<div class="bg_azure clickable" ng-click="SetLanguage(language)">
+				<div class="break_20"></div>
+				<div class="h1 text_white text_center" ng-bind="language.Name"></div>
+				<div class="break_20"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-if="Settings.CurrentLanguage != null && Settings.CurrentLesson == null" class="vcell_xs_24">
+	<div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="SetLanguage(null)">
+			<div class="label text_white text_center">Back</div>
+	</div>
+	<div class="vcell_xs_21 padding_10" style="overflow-y: auto;">
+		<div ng-repeat="lesson in Lessons track by $index" class="cell_xs_8 cell_md_3 padding_10">
+			<div class="clickable bg_azure" ng-click="SetLesson(lesson)">
+				<div class="break_20"></div>
+				<div class="h1 text_white text_center" ng-bind="lesson"></div>
+				<div class="break_20"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-if="Settings.CurrentLesson != null" class="vcell_xs_24">
+	<audio id="speech" src="" style="display:none;" controls="controls" autoplay="autoplay">Your browser does not support the audio element.</audio>
+	<div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="SetLesson(null)">
+			<div class="label text_white text_center">Back</div>
+	</div>
+
+	<div class="vcell_xs_18" style="overflow-y:auto;" ng-if="Settings.Lesson != null && Settings.LessonTemplate != null">
+		<div ng-repeat="phrase in Settings.LessonTemplate.Phrases track by $index" class="break_5">
+			
+			<div class="cell_xs_3">
+                    <div class="text {{phrase.Debut == true ? 'bg_azure text_white' : ''}}" ng-bind="$index + 1" ng-click="ToggleDebut(phrase)"></div>
+			</div>
+			<div class="cell_xs_11 spacing_10">
+				<div class="text element_multiline" ng-bind="phrase.Text"></div>
+				<div class="text element_multiline" ng-bind="Settings.Lesson.Phrases[$index].Translation"></div>
+                <div ng-if="Settings.Lesson.Phrases[$index].TranslationExtra != null && Settings.Lesson.Phrases[$index].Translation != ''"
+                      class="text element_multiline" ng-bind="Settings.Lesson.Phrases[$index].TranslationExtra"></div>
+			</div>
+			<div class="cell_xs_10">
+				<div class="button" ng-click="TranslatePhrase($index)">Tran</div>				
+				<div class="cell_xs_12">
+					<div ng-if="Settings.Lesson.Phrases[$index].Speech != null" class="button" ng-click="PlaySpeech(Settings.Lesson.Phrases[$index].Speech)">English</div>
+				</div>
+				<div class="cell_xs_12">
+					<div ng-if="Settings.Lesson.Phrases[$index].TranslationSpeech != null" class="button" ng-click="PlaySpeech(Settings.Lesson.Phrases[$index].TranslationSpeech)">Play</div>				
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="vcell_xs_3 cell_xs_12 center_vertical {{Settings.TranslateState == 'Translate All' ? 'clickable bg_azure':'bg_light'}}" ng-click="TranslateAll()"  ng-if="Settings.Lesson != null && Settings.LessonTemplate != null">
+			<div class="label text_white text_center" ng-bind="Settings.TranslateState"></div>
+	</div>
+	<div class="vcell_xs_3 cell_xs_12 center_vertical {{Settings.TranslateState == 'Translate All' ? 'clickable bg_azure':'bg_light'}}" ng-click="TranslateAllMissing()"  ng-if="Settings.Lesson != null && Settings.LessonTemplate != null">
+			<div class="label text_white text_center" ng-bind="Settings.TranslateState  == 'Translate All' ? 'All Missing' : Settings.TranslateState"></div>
+	</div>
+</div>

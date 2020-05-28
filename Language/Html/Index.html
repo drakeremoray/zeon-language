@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html ng-app="AngularApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer" />
+    <title>Language</title>
+    
+    <link href="/Content/Cupine.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Language.css" rel="stylesheet" type="text/css" />
+        
+    <script type="text/javascript" src="/Scripts/angular.min.js?@version"></script>
+    <script type="text/javascript" src="/Scripts/angular-ui-router.min.js?@version"></script>
+
+    <script src="/Scripts/Cupine.js?v10"></script>
+    <script src="/Scripts/Script.js?v10"></script>
+    <script src="/Scripts/HelperService.js?v10"></script>
+	<script src="/Scripts/UserService.js?v10"></script>
+
+    <script src="/Html/MainController.js?v10"></script>
+	<script src="/Html/App/AppController.js?v10"></script>
+
+    <script src="/Html/Home/Login/LoginController.js?v10"></script>
+    <script src="/Html/Home/Features/FeaturesController.js?v10"></script>
+    <script src="/Html/App/Lesson/LessonController.js?v10"></script>
+    <script src="/Html/App/Create/CreateController.js?v10"></script>
+	<script src="/Html/App/Create2/Create2Controller.js?v10"></script>
+    <script src="/Html/App/Create3/Create3Controller.js?v10"></script>
+    <script src="/Html/App/Generate/GenerateController.js?v10"></script>
+    <script src="/Html/App/Translate/TranslateController.js?v10"></script>
+    <script src="/Html/App/Settings/SettingsController.js?v10"></script>
+    <script>
+        var version = Math.random();
+    </script>
+</head>
+<body ng-controller="AngularParentController" class="bg_white">
+	<div class="page_fill" ui-view></div>
+    <div class="main_notification_container" id="notification_container"></div>
+</body>
+</html>

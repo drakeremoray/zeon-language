@@ -1,0 +1,20 @@
+﻿<div ng-controller="FeaturesController">
+    <div class="h1">Translation Test</div>
+    <input type="text" class="textbox spacing_10 bg_white border_light border_full text_dark" ng-model="Translation.Phrase" ngenter="TranslatePhrase()" />
+    <div class="break_20"></div>
+        <div class="label" ng-bind="Translation.Result"></div>
+    <!--<audio id="speech" src="https://translate.google.com/translate_tts?tl=en&q=hello" controls="controls" autoplay="autoplay">Your browser does not support the audio element.</audio>-->
+    <audio id="speech" src="" controls="controls" autoplay="autoplay">Your browser does not support the audio element.</audio>
+    <div class="break_10"></div>
+    <div ng-repeat="language in UserService.CurrentUser.Languages" class="spacing_10 break_20">
+        <div class="bg_azure clickable shadow_dark spacing_10" ng-click="SetLanguage()">
+            <div class="break_40"></div>
+            <div class="break_40"></div>
+            <div class="h4 text_white text_center" ng-bind="language.Name"></div>
+            <div class="break_40"></div>
+            <div class="cell_xs_12 label text_white text_left" ng-bind="language.Lesson"></div>
+            <div class="cell_xs_12 label text_white text_right" ng-bind="language.NextLessonTime"></div>
+            <div class="break_10"></div>
+        </div>
+    </div>
+</div>

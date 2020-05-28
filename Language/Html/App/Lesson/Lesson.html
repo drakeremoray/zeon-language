@@ -1,0 +1,59 @@
+﻿<div class="vcell_xs_24">
+    <audio id="speech" src="" style="display:none;" controls="controls">Your browser does not support the audio element.</audio>
+
+    <div class="bg_medium" style="height:40px;">
+        <div ng-if="Settings.CurrentPhrase != null" class="bg_azure vcell_xs_24 progress_bar" ng-style="{'position':'absolute','top':'0px','left':'0px', 'width':(100 * Settings.CurrentPhraseIndex / Settings.CurrentLesson.Phrases.length)+'%'}"></div>
+        <div class="text text_white text_center" style="line-height:40px;" ng-bind="(Settings.CurrentPhraseIndex + 1) + '/' + Settings.CurrentLesson.Phrases.length"></div>
+        <div class="padding_5 clickable vcell_xs_24" style="position:absolute;left:0px;width:40px;" ng-click="HelperService.Navigate('App')">
+            <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Exit.png')"></div>
+        </div>
+        <div ng-if="Settings.CurrentPhraseIndex > 0" class="padding_5 clickable vcell_xs_24" style="position:absolute;left:40px;width:40px;" ng-click="PreviousPhrase()">
+            <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Back.png')"></div>
+        </div>
+        <div class="padding_5 clickable vcell_xs_24" style="position:absolute;right:40px;width:40px;" ng-click="NextPhrase()">
+            <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Next.png')"></div>
+        </div>
+        <div class="padding_5 clickable vcell_xs_24" style="position:absolute;right:0px;width:40px;" ng-click="ManualFinish()">
+            <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Fast Forward.png')"></div>
+        </div>
+    </div>
+
+    <div class="padding_10" style="position:absolute;left:0px;top:30px;bottom:40px;overflow-y: auto;">
+        <div ng-if="Settings.CurrentPhrase.Type == 'Read'" class="h5 break_10">Just Read</div>
+        <div class="cell_xs_12 spacing_5">
+            <div ng-if="Settings.ShowEnglish == true">
+                <div class="text" ng-bind="Settings.CurrentPhrase.English"></div>
+            </div>
+        </div>
+        <div class="cell_xs_12 spacing_5">
+            <div ng-if="Settings.ShowTranslation == true" ng-style="Settings.LanguageOptions.TranslationStyle">
+                <div class="text" ng-bind="Settings.CurrentPhrase.Translation"></div>
+                <div ng-if="Settings.CurrentPhrase.TranslationLatin != null" class="text" ng-bind="Settings.CurrentPhrase.TranslationLatin"></div>
+                <div ng-if="Settings.CurrentPhrase.TranslationExtra != null" class="text" ng-bind="Settings.CurrentPhrase.TranslationExtra"></div>
+            </div>
+        </div>
+        <div class="break_20"></div>
+        <div ng-if="Settings.CurrentPhrase.Type == 'Write'" class="label text_dark">Write the English</div>
+        <div ng-if="Settings.CurrentPhrase.Type == 'Transcribe'" class="label text_dark">Write what you hear</div>
+        <div ng-if="Settings.CurrentPhrase.Type == 'Translate'" class="label text_dark">Translate the above</div>
+        <div ng-if="Settings.CurrentPhrase.Type == 'Listen'" class="label text_dark">Translate what you hear</div>
+
+        <div ng-if="Settings.CurrentPhrase.Type != 'Read'">
+            <textarea class="textbox border_light border_full element_large" ng-model="Settings.UserEffort" ngenter="UserInputFinish()"></textarea>
+        </div>
+        <div class="break_10"></div>
+
+    </div>
+
+    <div ng-if="HelperService.AppInterface != null" class="bg_azure clickable padding_10" style="position:absolute;left:10px;bottom:10px;height:50px;width:50px;border-radius:50px;" ng-click="DownloadLesson(Settings.CurrentLessonNumber)">
+        <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Download.png')"></div>
+    </div>
+
+    <div ng-if="Settings.ShowVoice == true" class="bg_azure clickable padding_10" style="position:absolute;right:70px;bottom:10px;height:50px;width:50px;border-radius:50px;" ng-click="PlaySpeech()">
+        <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Speaker.png')"></div>
+    </div>
+    <div class="{{Settings.UserCorrect == null ? 'bg_azure':Settings.UserCorrect ? 'bg_lime':'bg_red'}} clickable padding_10" style="position:absolute;right:10px;bottom:10px;height:50px;width:50px;border-radius:50px;" ng-click="UserInputFinish()">
+        <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Tick.png')"></div>
+    </div>
+</div>
+

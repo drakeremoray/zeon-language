@@ -1,0 +1,38 @@
+﻿<div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="HelperService.Navigate('App')">
+		<div class="label text_white text_center">Back</div>
+</div>
+<div class="vcell_xs_18" style="overflow-y:auto;">
+	<div ng-repeat="language in UserService.CurrentUser.Lessons">
+		<div class="cell_xs_8 label spacing_10 text_left" ng-bind="language.Name"></div>
+		<div class="cell_xs_6 spacing_10">
+			<div class="dropdown" onclick="ToggleDropDown(this, event)">
+				<div class="dropdown_selected bg_white clickable border_light border_full">
+					<div class="label text_dark spacing_10" ng-bind="language.Lesson"></div>
+				</div>
+				<div class="dropdown_options">
+					<div ng-repeat="lesson in Lessons track by $index" class="label bg_white text_dark clickable spacing_10" ng-bind="lesson" ng-click="SetLesson(language, lesson)"></div>
+				</div>
+			</div>
+		</div>
+		<div class="cell_xs_10 spacing_5">
+			<div ng-repeat="(reminderIndex, reminder) in language.Reminders track by $index">
+				<div class="cell_xs_16 spacing_5">
+					<div class="dropdown" onclick="ToggleDropDown(this, event)">
+						<div class="dropdown_selected bg_white clickable border_light border_full">
+							<div class="label spacing_10 text_dark" ng-bind="FormatAlarmTime(reminder)"></div>
+						</div>
+						<div class="dropdown_options">
+							<div ng-repeat="alarm in AlarmTimes" class="label text_dark bg_white clickable spacing_10" ng-bind="alarm.Name" ng-click="SetReminder(language, reminderIndex, alarm.Value)"></div>
+						</div>
+					</div>
+
+				</div>
+				<div class="cell_xs_8 spacing_5 label text_red bg_white clickable" ng-click="RemoveReminder(language, reminder)">X</div>
+			</div>
+			<div class="label text_azure bg_white clickable" ng-click="AddReminder(language)">+</div>
+		</div>
+	</div>
+</div>
+<div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="UserService.SaveSettings()">
+		<div class="label text_white text_center">Save Settings</div>
+</div>

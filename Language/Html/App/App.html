@@ -1,0 +1,42 @@
+﻿<div class="vcell_xs_24" style="overflow-y:auto;">
+    <div class="vcell_xs_3 bg_azure center_vertical text_left">
+
+        <div class="vcell_xs_24 cell_xs_4 padding_10" ng-if="UserService.CurrentUser.Id == 1">
+            <div class="vcell_xs_24 bg_azure clickable center_vertical" ng-click="HelperService.Navigate('App/Create3')">
+                <div class="h1 text_white text_center">C3</div>
+            </div>
+        </div>
+        <div class="vcell_xs_24 cell_xs_4 padding_10" ng-if="UserService.CurrentUser.Id == 1">
+            <div class="vcell_xs_24 bg_azure clickable center_vertical" ng-click="HelperService.Navigate('App/Translate')">
+                <div class="h1 text_white text_center">T</div>
+            </div>
+        </div>
+        <div class="cell_xs_12"></div>
+        <div class="vcell_xs_24 cell_xs_4">
+            <div class="vcell_xs_24 bg_azure clickable padding_10" ng-click="HelperService.Navigate('App/Settings')">
+                <div class="vcell_xs_24 element_fill" style="background-image:url('../Content/Settings.png')"></div>
+            </div>
+        </div>
+    </div>
+    <div class="vcell_xs_21 padding_10" style="overflow-y: auto;">
+        <div ng-repeat="language in UserService.CurrentUser.Lessons" class="cell_xs_24 cell_sm_12 cell_md_8 padding_10">
+            <div class="bg_azure clickable">
+                <div ng-click="HelperService.Navigate('App/Lesson/' + language.Name)">
+                    <div class="break_20"></div>
+                    <div class="h1 text_white text_center" ng-bind="language.Name"></div>
+                </div>
+                <div class="cell_xs_12">
+                    <div ng-if="language.Lesson > 1" ng-click="HelperService.Navigate('App/Lesson/' + language.Name + '/' + (language.Lesson - 1))">
+                        <img style="height:30px; width:auto;" src="../Content/Previous.png" />
+                        <div class="break_20"></div>
+                    </div>
+                </div>
+                <div class="cell_xs_12" ng-click="HelperService.Navigate('App/Lesson/' + language.Name)">
+                    <div class="h4 text_white text_center" ng-bind="language.Lesson"></div>
+                    <div class="break_20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

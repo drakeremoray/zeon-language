@@ -1,0 +1,10 @@
+﻿<div class="text_center" style="max-width:400px;">
+        <input type="text" class="textbox textbox_full spacing_10 bg_white border_full border_light text_dark" ng-model="LoginModel.EmailAddress" placeholder="Email Address" />
+        <div class="break_10"></div>
+        <input type="password" class="textbox textbox_full spacing_10 bg_white border_full border_light text_dark" ngenter="Login()" ng-model="LoginModel.Password" placeholder="Password" />
+        <div class="break_10"></div>
+        <div ng-if="LoginSettings.Error != ''" class="label text_red break_10" ng-bind="LoginSettings.Error"></div>
+        <div ng-if="LoginSettings.Loading != true" class="button button_full bg_azure" ng-click="Login()">Login</div>
+        <div ng-if="LoginSettings.Loading == true" class="label text_azure">Loading</div>
+        <div class="label text_orange">{{Login}}</div>
+</div>

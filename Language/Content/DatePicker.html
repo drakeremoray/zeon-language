@@ -1,0 +1,42 @@
+﻿<div class="text_center">
+    <div class="cell_xs_44" style="white-space: normal; width: 350px;">
+        <div class="break_10"></div>
+        <div ng-if="DateZooming == 0" onclick="EventCatch(event)">
+            <div ng-repeat="year in Years track by $index" class="cell_xs_6 spacing_5 datepicker_year_year">
+                <div class="text clickable text_center" ng-click="SetYear(year)">{{year}}</div>
+            </div>
+        </div>
+        <div ng-if="DateZooming == 1" onclick="EventCatch(event)">
+            <div class="spacing_5 datepicker_month_year" onclick="EventCatch(event)">
+                <div class="text clickable break_5" ng-click="SetDateZooming(0)">{{CurrentYear}}</div>
+            </div>
+            <div ng-repeat="month in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11] track by $index" class="cell_xs_6 spacing_5 datepicker_month_month">
+                <div class="text clickable" ng-click="SetMonth(month)">{{Months[month]}}</div>
+            </div>
+        </div>
+        <div ng-if="DateZooming == 2">
+            <div class="spacing_5" onclick="EventCatch(event)">
+                <div class="cell_xs_4 spacing_5 datepicker_day_scroll">
+                    <div class="text clickable" ng-click="ScrollMonth(-1)"><</div>
+                </div>
+                <div class="cell_xs_16 spacing_5 datepicker_day_month">
+                    <div class="label clickable" ng-click="SetDateZooming(1)">{{Months[CurrentMonth]}} {{CurrentYear}}</div>
+                </div>
+                <div class="cell_xs_4 spacing_5 datepicker_day_scroll">
+                    <div class="label clickable" ng-click="ScrollMonth(1)">></div>
+                </div>
+            </div>
+            <div class="spacing_5 text_left">
+                <div ng-repeat="day in DaysOfWeek track by $index" class="datepicker_day datepicker_day_week">
+                    <div class="label text_center">{{day}}</div>
+                </div>
+                <div ng-repeat="day in BlankDays track by $index" class="datepicker_day datepicker_day_blank">&nbsp;</div>
+                <div ng-repeat="day in Days track by $index" class="datepicker_day datepicker_day_date {{CurrentYear == TodayYear && CurrentMonth == TodayMonth && day == TodayDay ? 'datepicker_today':''}} {{CurrentYear == SelectedYear && CurrentMonth == SelectedMonth && day == SelectedDay ? 'datepicker_selected':''}}">
+                    <div class="clickable text text_center" ng-click="SetDate(day)">{{day}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="break_10"></div>
+    </div>
+
+</div>

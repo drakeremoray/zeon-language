@@ -1,0 +1,56 @@
+﻿<div ng-if="Settings.LessonTemplate == null" class="vcell_xs_24">
+    <div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="HelperService.Navigate('App')">
+            <div class="label text_white text_center">Back</div>
+    </div>
+    <div class="vcell_xs_21 padding_10" style="overflow-y: auto;">
+        <div ng-repeat="lesson in Lessons track by $index" class="cell_xs_8 cell_md_2 padding_10">
+            <div class="clickable bg_azure center_vertical" ng-click="SetLesson(lesson)">
+                    <div class="h1 text_white text_center" ng-bind="lesson"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="Settings.LessonTemplate != null" class="vcell_xs_24">
+    <div class="vcell_xs_2">
+        <div class="vcell_xs_24 cell_xs_8 clickable bg_azure" ng-click="SetLesson(null)">
+            <div class="vcell_xs_24 padding_5 element_fill" style="background-image:url('../Content/Back.png')"></div>
+        </div>
+        <div class="vcell_xs_24 cell_xs_8 clickable bg_azure" ng-click="DownloadTemplate(Settings.CurrentLessonNumber, true)">
+            <div class="vcell_xs_24 padding_5 element_fill" style="background-image:url('../Content/Download.png')"></div>
+        </div>
+        <div class="vcell_xs_24 cell_xs_8 clickable {{Settings.SaveState == 'Save' ? 'bg_azure' : 'bg_dark'}}" ng-click="SaveTemplate(null)">
+            <div class="vcell_xs_24 padding_5 element_fill" style="background-image:url('../Content/Tick.png')"></div>
+        </div>
+    </div>
+    <div class="vcell_xs_22">
+        <div class="vcell_xs_2 padding_10">
+            <div ng-repeat="(wordType, words) in Settings.LessonTemplate.RemainingWords" class="cell_xs_6">
+                <div class="cell_xs_12 label text_azure text_center" ng-bind="Settings.UsingWords[wordType].length"></div>
+                <div class="cell_xs_12 text text_center" ng-bind="words.length + '/' + Settings.RemainingPhrases"></div>
+            </div>
+        </div>
+        <div class="vcell_xs_10" style="overflow-y:auto;">
+            <div ng-repeat="(wordType, words) in Settings.LessonTemplate.RemainingWords" class="padding_2 cell_xs_6">
+                <div ng-repeat="word in words" class="spacing_2 clickable {{Settings.UsingWords[wordType].indexOf(word) > -1 ? 'bg_azure text_white':'bg_white'}}" ng-click="UseWord(word, wordType)">
+                    <div class="text spacing_1 text_left element_auto" style="font-size:10px;" ng-bind="(word.Plural == true ? 'P':'') + (word.Question == true ? 'Q':'') + (word.Negative == true ? 'N':'') + word.Index + ' ' + word.Word"></div>
+                </div>
+            </div>
+        </div>
+        <div class="vcell_xs_2 cell_xs_20">
+            <input type="text" class="vcell_xs_24 textbox spacing_10 text_dark bg_white border_full border_light" placeholder="Phrase" ng-model="Settings.NewPhrase" ngenter="AddPhrase()" />
+        </div>
+        <div class="vcell_xs_2 cell_xs_4 clickable bg_azure center_vertical" ng-click="AddPhrase()">
+                <div class="label text_white text_center">+</div>
+        </div>
+        <div class="vcell_xs_10" style="overflow-y:auto;">
+            <div ng-repeat="phrase in Settings.LessonTemplate.Phrases | orderBy:'-Index'" class="break_5">
+                <div class="cell_xs_3">
+                    <div class="text {{phrase.Debut == true ? 'bg_azure text_white' : ''}}" ng-bind="phrase.Type + '' + (phrase.Index + 1)" ng-click="ToggleDebut(phrase)"></div>
+                </div>
+                <div class="cell_xs_21">
+                    <input type="text" class="textbox bg_white border_full border_light text_dark spacing_10" ng-model="phrase.Text" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

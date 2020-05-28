@@ -1,0 +1,16 @@
+﻿<div class="vcell_xs_24">
+	<div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="HelperService.Navigate('App')">
+			<div class="label text_white text_center">Back</div>
+	</div>
+	<div class="vcell_xs_18 padding_10" style="overflow-y:auto;">
+		<div ng-repeat="(wordType, words) in Words" class="padding_10 cell_xs_6">
+			<div ng-repeat="word in words track by $index" class="clickable" ng-click="BoostWord(word)">
+				<div class="cell_xs_20 text spacing_10" ng-bind="word.English"></div>
+				<div class="cell_xs_4 text spacing_10" ng-bind="Round(word.WordIndex)"></div>
+			</div>
+		</div>
+	</div>
+	<div class="vcell_xs_3 clickable bg_azure center_vertical" ng-click="PlaceInGeneratedLessons()">
+			<div class="label text_white text_center">Place</div>
+	</div>
+</div>
